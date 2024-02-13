@@ -1,0 +1,100 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-image: url("/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url(/fonts/BebasNeue-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Great Vibes";
+    src: url(/fonts/GreatVibes-Regular.ttf) format("truetype");
+}
+
+/* Default font */
+html * {
+    font-family: "Bebas Neue";
+}
+
+/* Default Colors */
+h1 {
+    color: #FFC72C; /* ETSU Gold */
+}
+
+a {
+    color: #C6AA76; /* Old Gold */
+}
+
+p, ul , li {
+    color: white;
+}
+
+label {
+    color: white
+}
+
+/* Color and font classes */
+.color-etsu-navy {
+    color: #00053E;
+}
+
+.color-etsu-gold {
+    color: #FFC72C;
+}
+
+.color-medium-blue {
+    color: #002855;
+}
+
+.color-dark-blue {
+    color: #0C2340;
+}
+
+.color-old-gold {
+    color: #C6AA76;
+}
+
+.font-great-vibes {
+    font-family: "Great Vibes";
+}
+
+.game-item {
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+.game-title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.game-thumbnail {
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+   

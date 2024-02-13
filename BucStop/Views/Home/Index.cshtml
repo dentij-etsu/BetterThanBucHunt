@@ -1,0 +1,67 @@
+﻿﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Unused file for games list.-->
+@{
+    List<Game> gamesList = new List<Game>();
+    foreach (var game in Model)
+    {
+        gamesList.Add(game);
+        //gamesList.Sort(gamesList.playcount);
+
+    }
+}
+<div id="demo" class="carousel slide" data-bs-ride="carousel" style="margin-left: 100px; margin-right: 100px;">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        @for (int loop = 0; loop < Model.Count; loop++)
+        {
+            @if(loop == 0)
+            {
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="@loop" class="active"></button>
+            }
+            else
+            {
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="@loop"></button>
+            }
+            
+        }
+    </div>
+
+    <!-- Top 3 Games -->
+    <h1>top games</h1>
+    <!-- Game 1 -->
+    <div class="carousel-inner">
+        @foreach(var game in gamesList)
+        {
+            if(game.Id == 1)
+            {
+                <div class="carousel-item active">
+                    <a href="@Url.Action("Play", "Games", new { id = @game.Id })" style="text-decoration: none;">
+                        <img src=@game.Thumbnail alt="@game.Title" class="d-block" style="width:100%; height:500%;">
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="carousel-item">
+                    <a href="@Url.Action("Play", "Games", new { id = @game.Id })" style="text-decoration: none;">
+                        <img src=@game.Thumbnail alt="@game.Title" class="d-block" style="width:100%; height:500%;">
+                    </a>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+

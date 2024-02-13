@@ -1,0 +1,77 @@
+﻿@model BucStop.Models.Game
+
+<!-- This is the page every game is embeded into with the js files(in wwwroot folder) -->
+<style>
+    canvas {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        border-style: solid;
+    }
+</style>
+
+
+<!-- Content -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">@Model.Title</div>
+                <div class="card-body">
+                    <div class="game">
+
+                        <!-- Embed the game canvas here -->
+                        @if (Model.Title == "Snake")
+                        {
+                            <canvas width="400" height="400" id="game"></canvas>
+                        }
+                        else if (Model.Title == "Tetris")
+                        {
+                            <canvas width="320" height="640" id="game" style="border: 1px solid #000000; background-color: gray"></canvas>
+                        }
+                        else if (Model.Title == "Pong")
+                        {
+                            <canvas width="400" height="500" id="game" style="border: 1px solid #000000; background-color: gray"></canvas>
+                        }
+                        else
+                        {
+                            <canvas width="400" height="500" id="game" style="border: 1px solid #000000; background-color: gray"></canvas>
+                        }
+
+                            <!-- Embed the game's Javascript here -->
+                            <script src="@Url.Content(Model.Content)"></script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pills to view a games author, description, and how to play -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#author" type="button" role="tab" aria-controls="author" aria-selected="true">Author</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="false">Description</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#howtoplay" type="button" role="tab" aria-controls="howtoplay" aria-selected="false">How to Play</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="author" role="tabpanel" aria-labelledby="home-tab">
+                    <p>@Model.Author</p>
+                </div>
+                <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="profile-tab">
+                    <p>@Model.Description</p>
+                </div>
+                <div class="tab-pane fade" id="howtoplay" role="tabpanel" aria-labelledby="contact-tab">
+                    <p>@Model.HowTo</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+}
