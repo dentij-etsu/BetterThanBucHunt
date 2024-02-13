@@ -27,10 +27,10 @@ namespace BucStop.Controllers
         }
 
         //Takes the user to the admin page.
-        public IActionResult Admin()
-        {
-            return View();
-        }
+        //public IActionResult Admin()
+        //{
+        //    return View();
+        //}
 
         //Takes the user to the privacy policy page.
         public IActionResult Privacy()
