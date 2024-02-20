@@ -27,13 +27,15 @@ namespace BucStop.Controllers
         }
 
         //Takes the user to the admin page.
+        //This view has now been removed from the Views folder and from _Layout.cshtml
         //public IActionResult Admin()
         //{
         //    return View();
         //}
 
-        //Takes the user to the privacy policy page.
-        public IActionResult Privacy()
+        //Takes the user to the "Acceptable Use Policy" page.
+        //Changed Privacy() to AUP().
+        public IActionResult AUP()
         {
             return View();
         }

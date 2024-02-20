@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
  * This file handles the links to each of the game pages.
  */
 
+// Testing source control
+
 namespace BucStop.Controllers
 {
     [Authorize]
