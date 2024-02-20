@@ -32,8 +32,9 @@ namespace BucStop.Controllers
         //    return View();
         //}
 
-        //Takes the user to the privacy policy page.
-        public IActionResult Privacy()
+        //Takes the user to the "Acceptable Use Policy" page.
+        //Changed Privacy() to AUP().
+        public IActionResult AUP()
         {
             return View();
         }
