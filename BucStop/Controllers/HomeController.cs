@@ -27,6 +27,7 @@ namespace BucStop.Controllers
         }
 
         //Takes the user to the admin page.
+        //This view has now been removed from the Views folder and from _Layout.cshtml
         //public IActionResult Admin()
         //{
         //    return View();
