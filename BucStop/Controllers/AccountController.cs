@@ -28,7 +28,9 @@ namespace BucStop.Controllers
             {
 
                 accessCode = new AccessCode(email);
-                
+
+                SendEmail(accessCode.email, accessCode.code);
+
                 // If authentication is successful, create a ClaimsPrincipal and sign in the user
                 // ClaimsPrincipal is used to create a cookie to store the user's log in information
                 var claims = new[]
