@@ -30,7 +30,7 @@ namespace BucStop.Controllers
                 accessCode = new AccessCode(email);
 
                 // Email the code to the corresponding address
-                SendEmail(accessCode.email, accessCode.code);
+                SendCodeEmail(accessCode.email, accessCode.code);
 
                 // If authentication is successful, create a ClaimsPrincipal and sign in the user
                 // ClaimsPrincipal is used to create a cookie to store the user's log in information
@@ -62,9 +62,17 @@ namespace BucStop.Controllers
             return RedirectToAction("Login");
         }
 
-        public void SendEmail(string email, string code)
+        /* SendEmail uses the SMTP client and a static address to 
+         * send an email to the user's address (string email) containing 
+         * the login code (string code)
+         */
+        public void SendCodeEmail(string email, string code)
         {
-            // Gmail credentials (replace with your Gmail address and password)
+            // Gmail credentials
+            /* Email is currently disabled due to spam detection.
+             * This will need to be ironed out in another task, as I don't
+             * think appealing the account will protect it from another spam flag.
+            */ 
             string senderEmail = "bucstop24@gmail.com";
             string senderPassword = "akbr aulz okmf lack";
 
