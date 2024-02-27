@@ -1,7 +1,7 @@
 ﻿@model BucStop.Controllers.AccountController
 <h1>Login</h1>
 
-@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "loginForm" }))
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +15,7 @@
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4" style="padding-top: 23px">
-                <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+                <button type="submit" class="btn btn-primary" id="loginButton">Login</button>
             </div>
         </div>
 
