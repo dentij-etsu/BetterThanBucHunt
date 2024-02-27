@@ -18,7 +18,7 @@ namespace BucStop.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string email)
+        public async Task<IActionResult> Login(string email, string accessCode)
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
@@ -27,8 +27,9 @@ namespace BucStop.Controllers
                 //
 
                 string accessCodeFromEmail = "123456"; // Temp access code
-                var enteredAccessCode = "123456"; // Entered access code
-                if(enteredAccessCode == accessCodeFromEmail)
+                //accessCode = "123456";
+
+                if(accessCode == accessCodeFromEmail)
                 {
                     // If authentication is successful, create a ClaimsPrincipal and sign in the user
                     // ClaimsPrincipal is used to create a cookie to store the user's log in information
@@ -66,7 +67,6 @@ namespace BucStop.Controllers
             await HttpContext.SignOutAsync("CustomAuthenticationScheme");
             return RedirectToAction("Login");
         }
-
 
     }
 }
