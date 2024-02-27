@@ -29,6 +29,7 @@ namespace BucStop.Controllers
 
                 accessCode = new AccessCode(email);
 
+                // Email the code to the corresponding address
                 SendEmail(accessCode.email, accessCode.code);
 
                 // If authentication is successful, create a ClaimsPrincipal and sign in the user
@@ -85,11 +86,11 @@ namespace BucStop.Controllers
             {
                 // Send the email
                 smtpClient.Send(mail);
-                Console.WriteLine("Test email sent successfully.");
+                Console.WriteLine("Email sent successfully.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to send test email. Error: " + ex.Message);
+                Console.WriteLine("Failed to send email. Error: " + ex.Message);
             }
 
         }
