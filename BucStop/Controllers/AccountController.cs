@@ -24,7 +24,8 @@ namespace BucStop.Controllers
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
-                accessCode = new AccessCode(email);
+                //accessCode = new AccessCode(email);
+                //Used this to test access code.
                 
                 // If authentication is successful, create a ClaimsPrincipal and sign in the user
                 // ClaimsPrincipal is used to create a cookie to store the user's log in information
