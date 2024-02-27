@@ -1,7 +1,7 @@
 ﻿@model BucStop.Controllers.AccountController
 <h1>Login</h1>
 
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "loginForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -15,10 +15,49 @@
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4" style="padding-top: 23px">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+            </div>
+        </div>
+
+        <!-- UI for input of access code -->
+        <div class="row" style="display: none;" id="accessCodeRow">
+            <div class="col-12 col-md-6">
+                <label for="accessCode">Access Code</label>
+                <input type="password" id="accessCode" class="form-control" />
+            </div>
+            <div class="col-12 col-md-2" style="padding-top: 23px">
+                <button type="button" class="btn btn-primary" id="verifyButton">Verify</button>
+            </div>
+            <p>An access code has been sent to your email.</p>
+            <div class="col-12 col-md-6">
+                <button type="button" class="btn btn-primary" id="resendCode">Resend Code</button>
             </div>
         </div>
     </div>
-
-    
 }
+
+<!-- Logic for the verify button -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#loginButton").click(function () {
+            $("#accessCodeRow").show();
+
+            // Simulate receiving an access code via email
+            var accessCodeFromEmail = "123456"; // Temp access code
+        });
+
+        $("#verifyButton").click(function () {
+            // Add verification logic here
+            var enteredAccessCode = $("#accessCode").val();
+
+            // Compare entered access code with the one received via email
+            if (enteredAccessCode === "123456") { // Temp access code
+                // Redirect to home page
+                window.location.href = "/home"
+            } else {
+                alert("Incorrect access code. Please try again.");
+            }
+        });
+    });
+</script>
