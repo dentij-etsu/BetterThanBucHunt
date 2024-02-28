@@ -15,10 +15,35 @@
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="col-12 col-md-4" style="padding-top: 23px">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+            </div>
+        </div>
+
+        <!-- UI for input of access code -->
+        <div class="row" style="display: none;" id="accessCodeRow">
+            <div class="col-12 col-md-6">
+                <label for="accessCode">Access Code</label>
+                <input type="password" name="accessCode" class="form-control"/>
+            </div>
+            <div class="col-12 col-md-2" style="padding-top: 23px">
+                <button type="submit" class="btn btn-primary" id="verifyButton">Verify</button>
+            </div>
+            <p>An access code has been sent to your email.</p>
+            <div class="col-12 col-md-6">
+                <button type="button" class="btn btn-primary" id="resendCode">Resend Code</button>
             </div>
         </div>
     </div>
-
-    
 }
+
+<!-- Logic to show the accessCodeRow -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        $("#loginButton").click(function()
+        {
+            $("#accessCodeRow").show();
+        });
+    });
+</script>

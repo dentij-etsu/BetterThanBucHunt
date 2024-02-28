@@ -22,10 +22,11 @@ namespace BucStop.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string email)
+        public async Task<IActionResult> Login(string email, string accessCode)
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
+
 
                 accessCode = new AccessCode(email);
 
@@ -36,17 +37,28 @@ namespace BucStop.Controllers
                 // ClaimsPrincipal is used to create a cookie to store the user's log in information
                 var claims = new[]
                 {
+                    // If authentication is successful, create a ClaimsPrincipal and sign in the user
+                    // ClaimsPrincipal is used to create a cookie to store the user's log in information
+                    var claims = new[]
+                    {
                     new Claim(ClaimTypes.Name, email),
                     new Claim(ClaimTypes.NameIdentifier, "user_id"),
-                };
+                    };
 
-                var claimsIdentity = new ClaimsIdentity(claims, "custom");
-                var userPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    var claimsIdentity = new ClaimsIdentity(claims, "custom");
+                    var userPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                // Sign in the user
-                await HttpContext.SignInAsync("CustomAuthenticationScheme", userPrincipal);
+                    // Sign in the user
+                    await HttpContext.SignInAsync("CustomAuthenticationScheme", userPrincipal);
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    // Authentication failed, return to login page with an error message
+                    ModelState.AddModelError(string.Empty, "Incorrect Access Code");
+                    return View();
+                }
             }
             else
             {
