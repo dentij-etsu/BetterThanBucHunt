@@ -27,7 +27,6 @@ namespace BucStop.Controllers
                 //
 
                 string accessCodeFromEmail = "123456"; // Temp access code
-                //accessCode = "123456";
 
                 if(accessCode == accessCodeFromEmail)
                 {
@@ -50,7 +49,7 @@ namespace BucStop.Controllers
                 else
                 {
                     // Authentication failed, return to login page with an error message
-                    ModelState.AddModelError(string.Empty, "Incorrect Access Code.");
+                    ModelState.AddModelError(string.Empty, "Incorrect Access Code");
                     return View();
                 }
             }
