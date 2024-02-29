@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
-using System.Net;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
-using BucStop.Services;
 
 namespace BucStop.Controllers
 {
     public class AccountController : Controller
     {
         public string email { get; set; } = string.Empty;
-        public AccessCode accessCode;
 
         [AllowAnonymous]
         public IActionResult Login()
@@ -26,16 +22,13 @@ namespace BucStop.Controllers
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
+                // Joe Nagy - code generation goes here
 
+                //
 
-                accessCode = new AccessCode(email);
+                string accessCodeFromEmail = "123456"; // Temp access code
 
-                // Email the code to the corresponding address
-                SendCodeEmail(accessCode.email, accessCode.code);
-
-                // If authentication is successful, create a ClaimsPrincipal and sign in the user
-                // ClaimsPrincipal is used to create a cookie to store the user's log in information
-                var claims = new[]
+                if (accessCode == accessCodeFromEmail)
                 {
                     // If authentication is successful, create a ClaimsPrincipal and sign in the user
                     // ClaimsPrincipal is used to create a cookie to store the user's log in information
@@ -74,45 +67,5 @@ namespace BucStop.Controllers
             return RedirectToAction("Login");
         }
 
-        /* SendEmail uses the SMTP client and a static address to 
-         * send an email to the user's address (string email) containing 
-         * the login code (string code)
-         */
-        public void SendCodeEmail(string email, string code)
-        {
-            // Gmail credentials
-            /* Email is currently disabled due to spam detection.
-             * This will need to be ironed out in another task, as I don't
-             * think appealing the account will protect it from another spam flag.
-            */ 
-            string senderEmail = "bucstop24@gmail.com";
-            string senderPassword = "akbr aulz okmf lack";
-
-            // Recipient's email address
-            string recipientEmail = email;
-
-            // Create and configure the SMTP client
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.EnableSsl = true;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
-
-            // Create the email message
-            MailMessage mail = new MailMessage(senderEmail, recipientEmail);
-            mail.Subject = "Login to BucStop";
-            mail.Body = "Welcome to BucStop!\n\nHere is your login code: " + code;
-
-            try
-            {
-                // Send the email
-                smtpClient.Send(mail);
-                Console.WriteLine("Email sent successfully.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failed to send email. Error: " + ex.Message);
-            }
-
-        }
     }
 }
