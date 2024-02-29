@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
+using BucStop.Services;
 
 namespace BucStop.Controllers
 {
     public class AccountController : Controller
     {
         public string email { get; set; } = string.Empty;
+        public AccessCode accessCode;
 
         [AllowAnonymous]
         public IActionResult Login()
@@ -22,9 +24,8 @@ namespace BucStop.Controllers
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
-                // Joe Nagy - code generation goes here
-
-                //
+                //accessCode = new AccessCode(email);
+                //Used this to test access code.
                 
                 // If authentication is successful, create a ClaimsPrincipal and sign in the user
                 // ClaimsPrincipal is used to create a cookie to store the user's log in information
