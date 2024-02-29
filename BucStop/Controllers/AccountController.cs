@@ -22,20 +22,17 @@ namespace BucStop.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string email, string accessCode)
+        public async Task<IActionResult> Login(string email, string accessCode, AccessCode code)
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
+                // Joe Nagy - code generation goes here
 
+                //
 
-                accessCode = new AccessCode(email);
+                string accessCodeFromEmail = "123456"; // Temp access code
 
-                // Email the code to the corresponding address
-                SendCodeEmail(accessCode.email, accessCode.code);
-
-                // If authentication is successful, create a ClaimsPrincipal and sign in the user
-                // ClaimsPrincipal is used to create a cookie to store the user's log in information
-                var claims = new[]
+                if (accessCode == code.code && !code.isExpired())
                 {
                     // If authentication is successful, create a ClaimsPrincipal and sign in the user
                     // ClaimsPrincipal is used to create a cookie to store the user's log in information

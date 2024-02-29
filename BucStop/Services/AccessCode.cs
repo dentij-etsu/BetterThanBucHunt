@@ -31,7 +31,10 @@
 
             this.email = email;
         }
-
+        public bool isExpired()
+        {
+            return time <= DateTime.Now;
+        }
 
     }
 }
