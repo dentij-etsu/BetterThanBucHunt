@@ -1,17 +1,16 @@
-﻿// these should be the only references needed when making tests.
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using NUnit.Framework;
 
 /* Explanation of what's going on here:
  * 
- * We're using Selenium WebDriver and NUnit to create our testing script. 
+ * We're using Selenium WebDriver and NUnit to create our test. 
  * 
  * The Selenium library consists of all the things we need to actually use the WebDriver,
- * In our case we'll be using Chrome since it's the most popular. 
- * I also opted to do this all in C# since BucStop is a .NET project. 
+ * In this demo I decided to use the chrome driver since it's the most popular. 
+ * I also opted to do this all in C# since BucStop is a .NET project, but python is a popular choice. 
  * 
  * NUnit is typically used for unit testing, however we can use it in this case to 
- * better organize our different automated unit tests. 
+ * better organize tests in general. 
  */
 namespace BucStop.Tests
 {
@@ -28,7 +27,7 @@ namespace BucStop.Tests
         public void Cleanup()
         { /* ... */ }
 
-        // happy path test for login. 
+        // smoke test for user logins. 
         [Test]
         public void Login()
         {
