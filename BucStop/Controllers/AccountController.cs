@@ -32,7 +32,7 @@ namespace BucStop.Controllers
 
                 string accessCodeFromEmail = "123456"; // Temp access code
 
-                if (accessCode == code.code && !code.isExpired())
+                if (accessCode == accessCodeFromEmail)
                 {
                     // If authentication is successful, create a ClaimsPrincipal and sign in the user
                     // ClaimsPrincipal is used to create a cookie to store the user's log in information

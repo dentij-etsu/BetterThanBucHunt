@@ -1,68 +1,63 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+using BucStop.Services;
 
-/* Explanation of what's going on here:
- * 
- * We're using Selenium WebDriver and NUnit to create our test. 
- * 
- * The Selenium library consists of all the things we need to actually use the WebDriver,
- * In this demo I decided to use the chrome driver since it's the most popular. 
- * I also opted to do this all in C# since BucStop is a .NET project, but python is a popular choice. 
- * 
- * NUnit is typically used for unit testing, however we can use it in this case to 
- * better organize tests in general. 
- */
 namespace BucStop.Tests
 {
-    // allows the test class to be recognized by visual studio.
+
     [TestFixture]
     public class LoginTest
     {
-        // one time setup and teardown, you'd customize these if something needs to occur before a test
-        [OneTimeSetUp]
-        public void Init()
-        { /* ... */ }
+        public AccessCode accessCode;
+        private IWebDriver driver;
 
-        [OneTimeTearDown]
-        public void Cleanup()
-        { /* ... */ }
-
-        // smoke test for user logins. 
-        [Test]
-        public void Login()
+        [SetUp]
+        public void SetUp()
         {
-            // create an instance of a chrome webdriver 
-            var driver = new OpenQA.Selenium.Chrome.ChromeDriver();
+            driver = new ChromeDriver();
+        }
 
-            // set the url to the website you want to test (deployed ver. of bucstop)
-            driver.Url = "http://18.233.180.198";
-
-            /* gen. workflow: 
-             * finds the login button, clicks it...
-             * finds email textbox, clicks & autofills... 
-             * lastly, submits the email. 
-             */
-
-            var loginButton = driver.FindElement(By.Id("login"));
-            loginButton.Click();
-
-
-            var email = driver.FindElement(By.Id("email"));
-            email.Click();
-            email.SendKeys("member@etsu.edu");
-            email.Submit();
-
-            /* Uri (Uniform Resource Identifier): 
-             * a way to identify or locate a resource on the internet.
-             * use this to compare the driver url to the current url after the test workflow.
-             */
-            var uri = new Uri(driver.Url);
-
-            // checking that the url is equal to the corresponding url after the user logs in.
-            Assert.That(uri.Equals("http://18.233.180.198"));
-
-            // once the test is complete, close the driver.
+        [TearDown]
+        public void TearDown()
+        {
             driver.Quit();
         }
+
+        private void NavigateToLoginPage()
+        {
+            driver.Url = "https://localhost:7182/";
+            var loginPage = driver.FindElement(By.Id("login"));
+            loginPage.Click();
+        }
+
+        private void PerformLogin(string email)
+        {
+            var emailForm = driver.FindElement(By.Id("email"));
+            var loginButton = driver.FindElement(By.Id("loginButton"));
+            emailForm.SendKeys(email);
+            loginButton.Click();
+        }
+
+        private void ValidateAccessCode(string code)
+        {
+            var codeForm = driver.FindElement(By.Name("accessCode"));
+            codeForm.SendKeys(code);
+            codeForm.Submit();
+        }
+
+        [Test]
+        public void LoginWithValidCredentials()
+        {
+            //string code = accessCode.ToString();
+            accessCode = new AccessCode("member@etsu.edu");
+            NavigateToLoginPage();
+            PerformLogin(accessCode.email);
+            ValidateAccessCode("123456");
+            
+            Assert.That(new Uri(driver.Url).Equals("https://localhost:7182/"));
+        }
+
+        // Add more test methods for different scenarios
     }
 }
