@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 using BucStop.Services;
@@ -24,6 +26,12 @@ namespace BucStop.Controllers
         {
             if (Regex.IsMatch(email, @"\b[A-Za-z0-9._%+-]+@etsu\.edu\b"))
             {
+            
+                accessCode = new AccessCode(email);
+
+                // Email the code to the corresponding address
+                SendCodeEmail(accessCode.email, accessCode.code);
+                
                 //accessCode = new AccessCode(email);
                 //Used this to test access code.
                 
@@ -57,6 +65,45 @@ namespace BucStop.Controllers
             return RedirectToAction("Login");
         }
 
+        /* SendEmail uses the SMTP client and a static address to 
+         * send an email to the user's address (string email) containing 
+         * the login code (string code)
+         */
+        public void SendCodeEmail(string email, string code)
+        {
+            // Gmail credentials
+            /* Email is currently disabled due to spam detection.
+             * This will need to be ironed out in another task, as I don't
+             * think appealing the account will protect it from another spam flag.
+            */ 
+            string senderEmail = "bucstop24@gmail.com";
+            string senderPassword = "akbr aulz okmf lack";
 
+            // Recipient's email address
+            string recipientEmail = email;
+
+            // Create and configure the SMTP client
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
+
+            // Create the email message
+            MailMessage mail = new MailMessage(senderEmail, recipientEmail);
+            mail.Subject = "Login to BucStop";
+            mail.Body = "Welcome to BucStop!\n\nHere is your login code: " + code;
+
+            try
+            {
+                // Send the email
+                smtpClient.Send(mail);
+                Console.WriteLine("Email sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to send email. Error: " + ex.Message);
+            }
+
+        }
     }
 }
