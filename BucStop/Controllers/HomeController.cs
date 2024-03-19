@@ -46,6 +46,12 @@ namespace BucStop.Controllers
             return View();
         }
 
+        //Takes the user to the about us page.
+        public IActionResult About()
+        {
+            return View();
+        }
+
         //If something goes wrong, this will take the user to a page explaining the error.
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
