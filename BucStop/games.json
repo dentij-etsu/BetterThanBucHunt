@@ -5,7 +5,7 @@
     "Content": "/js/snake.js",
     "Description": "Snake Description",
     "Thumbnail": "/images/snake.jpg",
-    "PlayCount": 0
+    "PlayCount": 10
   },
   {
     "Id": 2,
@@ -13,7 +13,7 @@
     "Content": "/js/tetris.js",
     "Description": "Tetris Description",
     "Thumbnail": "/images/tetris.jpg",
-    "PlayCount": 0
+    "PlayCount": 20
   },
   {
     "Id": 3,
