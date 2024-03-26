@@ -55,7 +55,11 @@ namespace BucStop.Controllers
             {
                 // Authentication failed, return to the login page with an error message
                 ModelState.AddModelError(string.Empty, "Only ETSU students can play, sorry :(");
-                return View();
+                //return View(); -- original code before admissions page redirect code change
+                //return Redirect("https://www.etsu.edu/admissions/"); -- redirects in all cases
+
+                // Redirects after prompting user with a dialogue box
+                return View("PromptUser"); 
             }
         }
 

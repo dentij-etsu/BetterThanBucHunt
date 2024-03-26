@@ -1,0 +1,39 @@
+﻿@model BucStop.Controllers.AccountController
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prompt</title>
+    <h1>Oops!</h1>
+    <script>
+        // Create a dialog box to ask the user if they attend ETSU
+        function promptUser() {
+            var dialogBox = document.createElement('div');
+            dialogBox.innerHTML = `
+                        <div style="text-align: center;">
+                            <p>You didn't enter a valid ETSU email :(</p>
+                            <p>You must have an etsu.edu email address to play. If you are an ETSU student, you must enter your ETSU email address correctly. Don't worry: whether you are or aren't, we'll find a way to let you play BucStop.</p>
+                            <p>Are you an ETSU student?</p>
+                            <button onclick="handleResponse(true)">Yes</button>
+                            <button onclick="handleResponse(false)">No</button>
+                        </div>
+                    `;
+            document.body.appendChild(dialogBox);
+        }
+
+        function handleResponse(isEtsuStudent) {
+            if (isEtsuStudent) {
+                // Redirect back to login page
+                window.location.href = "/Account/Login";
+            } else {
+                // Redirect to external URL
+                window.location.href = "https://www.etsu.edu/admissions/";
+            }
+        }
+        // Call the function when the page loads
+        window.onload = promptUser;
+    </script>
+</head>
+<body>
+</body>
+</html>
