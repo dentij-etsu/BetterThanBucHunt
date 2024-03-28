@@ -94,6 +94,24 @@ label {
     margin: 0 auto;
 }
 
+.game-wrap {
+    position: relative;
+}
+
+.game-wrap .game-content {
+    display: none;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    background-color: #fff;
+    padding: .5em;
+    min-width: 10rem;
+}
+
+.game-wrap:hover .game-content {
+    display: block;
+}
 
 
 
