@@ -22,8 +22,13 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.x
-    - name: Run BucStop
-      run: dotnet build BucStop/BucStop.sln --configuration Release --verbosity detailed
-      
+        
+    - name: Restore dependencies
+      run: dotnet restore BucStop/BucStop.sln
+    
+    - name: Build the project
+      run: dotnet build BucStop/BucStop.sln --configuration Release --no-restore
+
     - name: Run Tests
-      run: dotnet test BucStop/Tests/LoginTest.cs
+      run: dotnet test BucStop/BucStop.sln --no-build
+
