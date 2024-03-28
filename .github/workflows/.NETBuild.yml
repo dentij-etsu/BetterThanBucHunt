@@ -22,6 +22,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.x
-    
+    - name: Run BucStop
+      run: dotnet run --project BucStop.sln
     - name: Run Tests
       run: dotnet test BucStop/Tests/LoginTest.cs
