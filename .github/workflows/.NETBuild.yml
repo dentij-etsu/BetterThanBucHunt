@@ -23,6 +23,7 @@ jobs:
       with:
         dotnet-version: 6.x
     - name: Run BucStop
-      run: dotnet run --project BucStop/BucStop.sln
+      run: dotnet run --project BucStop/BucStop.csproj
+      
     - name: Run Tests
       run: dotnet test BucStop/Tests/LoginTest.cs
